@@ -27,6 +27,7 @@ class Visualization extends React.Component {
     this.dragended = this.dragended.bind(this);
     this.color = this.color.bind(this);
     this.nodesToggleHandle = this.nodesToggleHandle.bind(this);
+    this.recenter = this.recenter.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class Visualization extends React.Component {
         nodes: allNodesSets
       });
 
-      this.mainCharacters = ['ARYA', 'DAENERYS', 'SANSA', 'JON', 'CERSEI', 'TYRION', 'JAIME', 'SAM'];
+      this.mainCharacters = ['ARYA', 'DAENERYS', 'SANSA', 'JON', 'CERSEI', 'TYRION', 'JAIME', 'SAM', 'THEON', 'NIGHT_KING'];
 
       this.width = 1600;
       this.height = 800;
@@ -57,12 +58,12 @@ class Visualization extends React.Component {
       this.nodes = this.state.nodes[this.setNumber];
       this.links = this.state.links[this.setNumber];
 
+      this.zoom = d3.zoom().scaleExtent([1 / 4, 4]).on("zoom", this.zoomed);
+
       this.svg = d3.select(this.refs.visualization).append('svg')
         .attr('width', this.width)
         .attr('height', this.height)
-        .call(d3.zoom()
-          .scaleExtent([1 / 4, 4])
-          .on("zoom", this.zoomed));
+        .call(this.zoom);
         
       this.svgContainer = this.svg.append('g');
 
@@ -84,7 +85,7 @@ class Visualization extends React.Component {
 
   update(setNumber, e) {
     e.preventDefault();
-    this.setNumber = setNumber;
+    if(setNumber !== -1) this.setNumber = setNumber;
     this.nodes = this.state.nodes[this.setNumber];
     this.links = this.state.links[this.setNumber];
 
@@ -93,6 +94,12 @@ class Visualization extends React.Component {
 
     d3.select('.nodes')
       .remove();
+
+    if (setNumber !== -1) {
+      this.svg.transition()
+        .duration(750)
+        .call(this.zoom.transform, d3.zoomIdentity);
+    }
 
     this.svgContainer.append('g')
       .attr('class', 'links');
@@ -200,15 +207,23 @@ class Visualization extends React.Component {
   nodesToggleHandle(e) {
     e.preventDefault();
     this.nodeModeOn = !this.nodeModeOn;
-    this.update(this.setNumber, e);
+    this.update(-1, e);
+  }
+
+  recenter(e) {
+    e.preventDefault();
+    this.svg.transition()
+      .duration(750)
+      .call(this.zoom.transform, d3.zoomIdentity);
   }
 
   render() {
     return (
       <div id="visualization" ref="visualization">
-
+        <h1>Collapsible Force Layout using D3 V5</h1>
         <div className="visualization-buttons-div">
-          <button className="visualization-btn" onClick={this.nodesToggleHandle.bind(this)}>Mode Switch</button>
+          <button className="visualization-btn" onClick={this.nodesToggleHandle}>Mode Switch</button>
+          <button className="visualization-btn" onClick={this.recenter}>Re-center</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 1)}>Season 2</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 2)}>Season 3</button>

@@ -1,0 +1,19 @@
+#matrix svg {
+  /* display: flex;
+  justify-content: center;
+  margin: auto; */
+}
+
+.column text {
+  text-anchor: start;
+  font-size: 10px;
+}
+
+.row text {
+  text-anchor: end;
+  font-size: 10px;
+}
+
+text.active {
+  fill: red;
+}
