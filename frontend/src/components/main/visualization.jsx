@@ -15,6 +15,8 @@ class Visualization extends React.Component {
       nodes: []
     };
 
+    this.nodeModeOn = false;
+
     this.update = this.update.bind(this);
     this.zoomed = this.zoomed.bind(this);
     this.ticked = this.ticked.bind(this);
@@ -24,6 +26,7 @@ class Visualization extends React.Component {
     this.dragged = this.dragged.bind(this);
     this.dragended = this.dragended.bind(this);
     this.color = this.color.bind(this);
+    this.nodesToggleHandle = this.nodesToggleHandle.bind(this);
   }
 
   componentDidMount() {
@@ -50,9 +53,9 @@ class Visualization extends React.Component {
       this.width = 1600;
       this.height = 800;
 
-      const setNumber = 5; //0-6
-      this.nodes = this.state.nodes[setNumber];
-      this.links = this.state.links[setNumber];
+      this.setNumber = 5; //0-6
+      this.nodes = this.state.nodes[this.setNumber];
+      this.links = this.state.links[this.setNumber];
 
       this.svg = d3.select(this.refs.visualization).append('svg')
         .attr('width', this.width)
@@ -81,9 +84,9 @@ class Visualization extends React.Component {
 
   update(setNumber, e) {
     e.preventDefault();
-
-    this.nodes = this.state.nodes[setNumber];
-    this.links = this.state.links[setNumber];
+    this.setNumber = setNumber;
+    this.nodes = this.state.nodes[this.setNumber];
+    this.links = this.state.links[this.setNumber];
 
     d3.select('.links')
       .remove();
@@ -154,52 +157,58 @@ class Visualization extends React.Component {
   }
 
   updateNodes() {
-    // display nodes
-    // let u = d3.select('.nodes')
-    //   .selectAll('circle')
-    //   .data(this.nodes)
-    //   .call(d3.drag()
-    //     .on("start", this.dragstarted)
-    //     .on("drag", this.dragged)
-    //     .on("end", this.dragended));
-    
-    // u.enter()
-    //   .append('circle')
-    //   .merge(u)
-    //   .attr('cx',d => d.x)
-    //   .attr('cy', d => d.y)
-    //   .attr("r", 8);
+    if (this.nodeModeOn) {   
+      let u = d3.select('.nodes')
+        .selectAll('circle')
+        .data(this.nodes)
+        .call(d3.drag()
+          .on("start", this.dragstarted)
+          .on("drag", this.dragged)
+          .on("end", this.dragended));
 
-    // u.exit().remove();
+      u.enter()
+        .append('circle')
+        .merge(u)
+        .attr('cx',d => d.x)
+        .attr('cy', d => d.y)
+        .attr("r", 8)
+        .style("fill", this.color);
 
-    // display names
-    let u = d3.select('.nodes')
-      .selectAll('text')
-      .data(this.nodes)
-      .call(d3.drag()
-        .on("start", this.dragstarted)
-        .on("drag", this.dragged)
-        .on("end", this.dragended));
+      u.exit().remove();
+    } else {
+      let u = d3.select('.nodes')
+        .selectAll('text')
+        .data(this.nodes)
+        .call(d3.drag()
+          .on("start", this.dragstarted)
+          .on("drag", this.dragged)
+          .on("end", this.dragended));
 
-    u.enter()
-      .append('text')
-      .text(d => d.name)
-      .merge(u)
-      .attr('x', d => d.x)
-      .attr('y', d => d.y)
-      .attr('dy', d => 3)
-      .style("fill", this.color);
+      u.enter()
+        .append('text')
+        .text(d => d.name)
+        .merge(u)
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .attr('dy', d => 3)
+        .style("fill", this.color);
 
-    u.exit().remove();
+      u.exit().remove();
+    }
   }
 
+  nodesToggleHandle(e) {
+    e.preventDefault();
+    this.nodeModeOn = !this.nodeModeOn;
+    this.update(this.setNumber, e);
+  }
 
   render() {
     return (
       <div id="visualization" ref="visualization">
 
         <div className="visualization-buttons-div">
-          <button className="visualization-btn">Reset</button>
+          <button className="visualization-btn" onClick={this.nodesToggleHandle.bind(this)}>Mode Switch</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 1)}>Season 2</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 2)}>Season 3</button>

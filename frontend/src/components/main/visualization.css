@@ -5,7 +5,6 @@ svg {
 }
 
 circle {
-  fill: #fd8d3c;
   cursor: pointer;
   stroke: #3182bd;
   stroke-width: 1.5px;
