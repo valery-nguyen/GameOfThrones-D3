@@ -1,6 +1,7 @@
 import './matrix.css';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 import { merge } from 'lodash';
 import { linksSelector, nodesSelector } from './../../reducers/selectors';
@@ -296,6 +297,8 @@ class Matrix extends React.Component {
       <div id="matrix" ref="matrix">
         <h1>Co-occurrence Matrix using D3 V5</h1>
         <div className="matrix-buttons-div">
+          <Link to='/'>Collapsible Force Layout Representation</Link>
+          <br/>
           <button className="matrix-btn" onClick={this.toggleByName}>By Name</button>
           <button className="matrix-btn" onClick={this.toggleByFrequency}>By Frequency</button>
         </div>

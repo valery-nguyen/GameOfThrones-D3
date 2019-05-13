@@ -1,6 +1,7 @@
 import './visualization.css';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 import { linksSelector, nodesSelector } from './../../reducers/selectors';
 
@@ -222,6 +223,8 @@ class Visualization extends React.Component {
       <div id="visualization" ref="visualization">
         <h1>Collapsible Force Layout using D3 V5</h1>
         <div className="visualization-buttons-div">
+          <Link to='/matrix'>Matrix Representation</Link>
+          <br />
           <button className="visualization-btn" onClick={this.nodesToggleHandle}>Mode Switch</button>
           <button className="visualization-btn" onClick={this.recenter}>Re-center</button>
           <button className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
