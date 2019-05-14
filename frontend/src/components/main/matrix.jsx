@@ -18,6 +18,7 @@ class Matrix extends React.Component {
       nodes: []
     };
 
+    this.display = this.display.bind(this);
     this.ticked = this.ticked.bind(this);
     this.updateLinks = this.updateLinks.bind(this);
     this.updateNodes = this.updateNodes.bind(this);
@@ -38,12 +39,15 @@ class Matrix extends React.Component {
       let allLinksSets = [];
       let allNodesSets = {};
       let allKeys = Object.keys(allNodesSets);
+      let allDeaths = [];
 
       datasets.forEach((dataset, idx) => {
-        if (idx % 2 === 0) {
+        if (idx === datasets.length - 1) {
+          allDeaths = dataset;
+        }
+        else if (idx % 2 === 0) {
           allLinksSets = allLinksSets.concat(dataset);
         } else {
-
           dataset.forEach(el => {
             allKeys = Object.keys(allNodesSets);
             if (!allKeys.includes(el.Id)) allNodesSets[el.Id] = el;
@@ -116,6 +120,7 @@ class Matrix extends React.Component {
       
       this.nodes.forEach((node, idx) => {
         node.count = 0;
+        node.deathCount = 0;
         node.index = idx;
         this.matrix[idx] = d3.range(n).map(idx2 => { return { x: idx2, y: idx, z: 0}; });
       });
@@ -129,54 +134,69 @@ class Matrix extends React.Component {
         this.nodes[this.nodeKeys.indexOf(link.Target)].count += parseInt(link.Weight);
       });
 
+      allDeaths.forEach(death => {
+        if (this.nodes[this.nodeKeys.indexOf(death.name)]) {
+        this.nodes[this.nodeKeys.indexOf(death.name)].deathCount += 1;
+        }
+      });
+
       window.orders = this.orders = {
         label: d3.range(n).sort((a, b) => { return d3.ascending(this.nodes[a].Label, this.nodes[b].Label); }),
-        count: d3.range(n).sort((a, b) => { return this.nodes[b].count - this.nodes[a].count; })
+        count: d3.range(n).sort((a, b) => { return this.nodes[b].count - this.nodes[a].count; }),
+        deathCount: d3.range(n).sort((a, b) => { return this.nodes[b].deathCount - this.nodes[a].deathCount; }),
       };
 
       // initial display
       this.x.domain(this.orders.label);
-      window.colors = d3.scaleSequential(d3.interpolateBlues).domain([0, 35]);
+      window.displayBy = 'label';
 
-      this.svgContainer = this.svg.append('g').attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
-      this.svgContainer.append('rect')
-        .attr("class", "background")
-        .attr("width", this.width)
-        .attr("height", this.height)
-        .style("fill", 'whitesmoke');
-
-      this.row = this.svgContainer.selectAll(".row")
-        .data(this.matrix)
-        .enter().append("g")
-        .attr("class", "row")
-        .attr("transform", (d, i) => { return "translate(0," + this.x(this.orders.label[i]) + ")"; })
-        .each(this.createRow);
-
-      this.row.append("line")
-        .attr("x2", this.width);
-
-      this.row.append("text")
-        .attr("x", -6)
-        .attr("y", (this.x.range()[1] - this.x.range()[0]) / (2 * n))
-        .attr("dy", ".32em")
-        .text((d, i) => this.nodes[i].Label);
-
-      this.column = this.svgContainer.selectAll(".column")
-        .data(this.matrix)
-        .enter().append("g")
-        .attr("class", "column")
-        .attr("transform", (d, i) => { return "translate(" + this.x(this.orders.label[i]) + ")rotate(-90)"; });
-
-      this.column.append("line")
-        .attr("x1", -this.width);
-
-      this.column.append("text")
-        .attr("x", 6)
-        .attr("y", (this.x.range()[1] - this.x.range()[0]) / (2 * n))
-        .attr("dy", ".32em")
-        .text((d, i) => { return this.nodes[i].Label; });
+      this.display();
     });
+  }
+
+  display() {
+    const n = window.n;
+
+    window.colors = d3.scaleSequential(d3.interpolateBlues).domain([0, 35]);
+
+    this.svgContainer = this.svg.append('g').attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+    this.svgContainer.append('rect')
+      .attr("class", "background")
+      .attr("width", this.width)
+      .attr("height", this.height)
+      .style("fill", 'whitesmoke');
+
+    this.row = this.svgContainer.selectAll(".row")
+      .data(this.matrix)
+      .enter().append("g")
+      .attr("class", "row")
+      .attr("transform", (d, i) => { return "translate(0," + this.x(this.orders.label[i]) + ")"; })
+      .each(this.createRow);
+
+    this.row.append("line")
+      .attr("x2", this.width);
+
+    this.row.append("text")
+      .attr("x", -6)
+      .attr("y", (this.x.range()[1] - this.x.range()[0]) / (2 * n))
+      .attr("dy", ".32em")
+      .text((d, i) => this.nodes[i].Label);
+
+    this.column = this.svgContainer.selectAll(".column")
+      .data(this.matrix)
+      .enter().append("g")
+      .attr("class", "column")
+      .attr("transform", (d, i) => { return "translate(" + this.x(this.orders.label[i]) + ")rotate(-90)"; });
+
+    this.column.append("line")
+      .attr("x1", -this.width);
+
+    this.column.append("text")
+      .attr("x", 6)
+      .attr("y", (this.x.range()[1] - this.x.range()[0]) / (2 * n))
+      .attr("dy", ".32em")
+      .text((d, i) => { return this.nodes[i].Label; });
   }
 
   createRow(row) {
