@@ -4,6 +4,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 
+import BarChart from './barchart';
+
 window.d3 = d3;
 
 class Matrix extends React.Component {
@@ -16,11 +18,6 @@ class Matrix extends React.Component {
     };
 
     this.cooccurenceDisplay = this.cooccurenceDisplay.bind(this);
-    this.barChartDisplay = this.barChartDisplay.bind(this);
-    this.bar = this.bar.bind(this);
-    this.stack = this.stack.bind(this);
-    this.barchartPopulate = this.barchartPopulate.bind(this);
-
     this.ticked = this.ticked.bind(this);
     this.updateLinks = this.updateLinks.bind(this);
     this.updateNodes = this.updateNodes.bind(this);
@@ -142,6 +139,9 @@ class Matrix extends React.Component {
         }
       });
 
+      debugger
+      window.deathsCountNodes = this.nodes;
+
       window.orders = this.orders = {
         label: d3.range(n).sort((a, b) => { return d3.ascending(this.nodes[a].Label, this.nodes[b].Label); }),
         count: d3.range(n).sort((a, b) => { return this.nodes[b].count - this.nodes[a].count; }),
@@ -153,127 +153,7 @@ class Matrix extends React.Component {
       window.displayBy = 'label';
 
       this.cooccurenceDisplay();
-      this.barChartDisplay();
     });
-  }
-
-  barChartDisplay() {
-    // preprocessing data
-    let barChartNodes = [];
-    window.orders.deathCount.slice(0,18).forEach(idx => {
-      barChartNodes.push(this.nodes[idx]);
-    });
-    
-    this.barchartMargin = { top: 20, right: 60, bottom: 0, left: 60 };
-    this.barchartWidth = 480 - this.barchartMargin.left - this.barchartMargin.right;
-    this.barchartHeight = 460 - this.barchartMargin.top - this.barchartMargin.bottom;
-
-    this.barchartx = d3.scaleLinear().range([0, this.barchartWidth]);
-    this.barcharty = 20;
-
-    this.barchartColor = d3.scaleOrdinal().range(["steelblue", "red"]);
-
-    this.partition = d3.partition();
-
-    this.xAxis = d3.axisTop(this.barchartx).tickFormat(d => d);
-
-    this.barChartSvg = d3.select(this.refs.barchart).append('svg')
-      .attr('width', this.barchartWidth + this.barchartMargin.left + this.barchartMargin.right)
-      .attr('height', this.barchartHeight + this.barchartMargin.top + this.barchartMargin.bottom)
-      .append('g')
-      .attr("transform", "translate(" + this.barchartMargin.left + "," + this.barchartMargin.top + ")");
-
-    this.barChartSvg.append("rect")
-      .attr("class", "barchart-background")
-      .attr("width", this.barchartWidth)
-      .attr("height", this.barchartHeight);
-
-    this.barChartSvg.append("g")
-      .attr("class", "x axis");
-
-    this.barChartSvg.append("g")
-      .attr("class", "y axis")
-      .append("line")
-        .attr("y1", "100%");
-
-    const root = d3.hierarchy({ root: "root", children: barChartNodes });
-    root.sum(d => d.size);
-
-    this.partition(root);
-    this.barchartx.domain([0, root.value]).nice();
-    this.barchartPopulate(root, 0);
-  }
-
-  barchartPopulate(d, i) {
-    if (!d.children) return;
-
-    const duration = 750;
-    const delay = 25;
-    let end = duration + d.children.length * delay;
-
-    let enter = this.bar(d)
-      .attr("transform", this.stack(i))
-      .style("opacity", 1);
-
-    enter.select("text").style("fill-opacity", 1e-6);
-    enter.select("rect").style("fill", this.barchartColor(true));
-
-    this.barchartx.domain([0, d3.max(d.children, d => d.data.deathCount)]).nice();
-    this.barChartSvg.selectAll(".x.axis").transition()
-      .duration(duration)
-      .call(this.xAxis);
-
-    let enterTransition = enter.transition()
-      .duration(duration)
-      .delay((d, i) => i * delay)
-      .attr("transform", (d, i) => "translate(0," + this.barcharty * i * 1.2 + ")");
-
-    enterTransition.select("text")
-      .style("fill-opacity", 1);
-
-    enterTransition.select("rect")
-      .attr("width", d => this.barchartx(d.data.deathCount))
-      .style("fill", d => this.barchartColor(!!d.children));
-
-    this.barChartSvg.select(".barchart-background")
-      .datum(d)
-      .transition()
-      .duration(end);
-
-    d.index = i;
-  }
-
-  bar(d) {
-    let bar = this.barChartSvg.insert("g", ".y.axis")
-      .attr("class", "enter")
-      .attr("transform", "translate(0,5)")
-      .selectAll("g")
-      .data(d.children)
-      .enter().append("g")
-      .style("cursor", d => !d.children ? null : "pointer")
-      .on("click", this.barchartPopulate);
-
-    bar.append("text")
-      .attr("x", -6)
-      .attr("y", this.barcharty / 2)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(d => d.data.Label);
-
-    bar.append("rect")
-      .attr("width", d => this.barchartx(d.data.deathCount))
-      .attr("height", this.barcharty);
-
-    return bar;
-  }
-
-  stack(i) {
-    let x0 = 0;
-    return (d) => {
-      let tx = "translate(" + x0 + "," + this.barcharty * i * 1.2 + ")";
-      x0 += this.barchartx(d.data.deathCount);
-      return tx;
-    };
   }
 
   cooccurenceDisplay() {
@@ -318,11 +198,11 @@ class Matrix extends React.Component {
       .attr("x", 6)
       .attr("y", (this.x.range()[1] - this.x.range()[0]) / (2 * n))
       .attr("dy", ".32em")
-      .text((d, i) => this.nodes[i].Label);
+      .text((d, i) => { return this.nodes[i].Label; });
   }
 
   createRow(row) {
-    d3.select(this).selectAll(".cell")
+    let cell = d3.select(this).selectAll(".cell")
       .data(row.filter(d => d.z))
       .enter().append("rect")
       .attr("class", "cell")
@@ -398,8 +278,8 @@ class Matrix extends React.Component {
   }
 
   mouseover(p) {
-    d3.selectAll(".row text").classed("active", (d, i) => i === p.y);
-    d3.selectAll(".column text").classed("active", (d, i) => i === p.x);
+    d3.selectAll(".row text").classed("active", (d, i) => i == p.y);
+    d3.selectAll(".column text").classed("active", (d, i) => i == p.x);
   }
 
   mouseout() {
@@ -446,12 +326,8 @@ class Matrix extends React.Component {
           </div>
         </div>
         <div className="matrix-barchart">
-          <div id="matrix" ref="matrix">
-            <label>Interactions between characters:</label>
-          </div>
-          <div id="barchart" ref="barchart">
-            <label>Number of people killed:</label>
-          </div>
+          <div id="matrix" ref="matrix"></div>
+          <BarChart />
         </div>
       </div>
     );

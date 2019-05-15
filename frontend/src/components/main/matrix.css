@@ -1,7 +1,14 @@
-#matrix svg {
-  /* display: flex;
-  justify-content: center;
-  margin: auto; */
+.matrix-barchart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#matrix {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 
 .column text {
@@ -16,4 +23,35 @@
 
 text.active {
   fill: red;
+}
+
+
+/* barchart css below */
+#barchart {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+#barchart svg {
+  margin: 0;
+}
+
+.barchart-background {
+  fill: white;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
 }
