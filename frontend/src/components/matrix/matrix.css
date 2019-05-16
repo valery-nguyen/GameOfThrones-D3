@@ -7,13 +7,13 @@
 .matrix-header-container {
   display: flex;
   flex-direction: row;
-  border-top: 2px solid lightgray;
+  border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   width: 100%;
   position: fixed;
   top: 40px;
   background-color: white;
-  z-index: 2px;
+  z-index: 1;
 }
 
 .matrix-header {
@@ -100,7 +100,7 @@ text {
 
 @media all and (max-width: 480px) {
   .matrix-header-container {
-    top: 36px;
+    top: 37px;
   }
 
   .matrix-header button {
