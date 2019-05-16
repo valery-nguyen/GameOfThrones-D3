@@ -18,6 +18,7 @@
   position: fixed;
   top: 41px;
   background-color: white;
+  z-index: 1;
 }
 
 .visualization-header {

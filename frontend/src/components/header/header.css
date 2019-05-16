@@ -10,6 +10,7 @@
   width: 100vw;
   position: fixed;
   background-color: white;
+  z-index: 1;
 }
 
 .header {
@@ -37,6 +38,7 @@
   align-items: center;
   margin: 7px 20px;
   font-size: 14px;
+  text-align: center;
 }
 
 .header a:first-of-type {
@@ -61,5 +63,9 @@
   .header div {
     justify-content: space-between;
     width: 100%;
+  }
+
+  .header a {
+    margin: 7px 0px;
   }
 }
