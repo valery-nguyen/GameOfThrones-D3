@@ -1,17 +1,7 @@
-export const visualizationsSelector = function (visualizations) {
-  let dataset = [];
-  if (Object.values(visualizations).length > 0) {
-    visualizations.forEach(visualization => {
-      dataset.push(visualization.map(obj => Object.values(obj)));
-    });
-  }
-  return dataset;
-};
-
-export const linksSelector = function (visualizations) {
-  if (!visualizations) return [];
+export const linksSelector = function (data) {
+  if (!data) return [];
   let links = [];
-  visualizations.forEach(datapoint => {
+  data.forEach(datapoint => {
     links.push(
       {
         source: datapoint.Source,
@@ -22,10 +12,10 @@ export const linksSelector = function (visualizations) {
   return links;
 };
 
-export const nodesSelector = function (visualizations) {
-  if (!visualizations) return [];
+export const nodesSelector = function (data) {
+  if (!data) return [];
   let nodes = [];
-  visualizations.forEach(datapoint => {
+  data.forEach(datapoint => {
     nodes.push(
       {
         id: datapoint.Id,

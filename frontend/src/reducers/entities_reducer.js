@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import visualizations from './visualizations_reducer';
+import data from './data_reducer';
 
 const EntitiesReducer = combineReducers({
-  visualizations,
+  data,
 });
 
 export default EntitiesReducer;

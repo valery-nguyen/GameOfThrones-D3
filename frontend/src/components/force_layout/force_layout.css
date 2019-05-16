@@ -1,0 +1,75 @@
+.visualization-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 108px);
+  width: 100vw;
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+}
+
+.visualization-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  position: fixed;
+  top: 41px;
+  background-color: white;
+}
+
+.visualization-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  font-size: 14px;
+  color: gray;
+  box-sizing: content-box;
+}
+
+.visualization-buttons-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualization-header button {
+  margin: 5px 20px 5px 20px;
+  font-size: 13px;
+}
+
+#visualization {
+  height: calc(100vh - 92px);
+}
+
+#visualization svg {
+  display:flex;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
+circle {
+  cursor: pointer;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+line {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+.visualization-container text {
+  cursor: pointer;
+  text-anchor: middle;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  border: 1px solid #3182bd;
+}
+  

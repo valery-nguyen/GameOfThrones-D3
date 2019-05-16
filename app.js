@@ -2,7 +2,7 @@ const path = require('path');
 const express = require("express");
 const app = express();
 
-const visualizations = require("./routes/api/visualizations");
+const data = require("./routes/api/data");
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use("/api/visualizations", visualizations);
+app.use("/api/data", data);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));

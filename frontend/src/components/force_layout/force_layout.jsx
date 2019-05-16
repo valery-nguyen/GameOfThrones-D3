@@ -1,13 +1,11 @@
-import './visualization.css';
-
+import './force_layout.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 import { linksSelector, nodesSelector } from './../../reducers/selectors';
 
 window.d3 = d3;
 
-class Visualization extends React.Component {
+class ForceLayout extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,8 +30,8 @@ class Visualization extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchVisualizations().then((res) => {
-      const datasets = res.visualizations.data;
+    this.props.fetchData().then((res) => {
+      const datasets = res.data.data;
       let allLinksSets = [];
       let allNodesSets = [];
 
@@ -62,8 +60,6 @@ class Visualization extends React.Component {
       this.zoom = d3.zoom().scaleExtent([1 / 4, 4]).on("zoom", this.zoomed);
 
       this.svg = d3.select(this.refs.visualization).append('svg')
-        .attr('width', this.width)
-        .attr('height', this.height)
         .call(this.zoom);
         
       this.svgContainer = this.svg.append('g');
@@ -220,25 +216,27 @@ class Visualization extends React.Component {
 
   render() {
     return (
-      <div id="visualization" ref="visualization">
-        <h1>Collapsible Force Layout using D3 V5</h1>
-        <div className="visualization-buttons-div">
-          <Link to='/matrix'>Matrix Representation</Link>
-          <br />
-          <button className="visualization-btn" onClick={this.nodesToggleHandle}>Mode Switch</button>
-          <button className="visualization-btn" onClick={this.recenter}>Re-center</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 1)}>Season 2</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 2)}>Season 3</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 3)}>Season 4</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 4)}>Season 5</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 5)}>Season 6</button>
-          <button className="visualization-btn" onClick={this.update.bind(this, 6)}>Season 7</button>
+      <div className="visualization-container">
+        <div className="visualization-header-container">
+          <div className="visualization-header">
+            <div className="visualization-buttons-div">
+              <button className="visualization-btn" onClick={this.nodesToggleHandle}>Mode Switch</button>
+              <button className="visualization-btn" onClick={this.recenter}>Re-center</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 1)}>Season 2</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 2)}>Season 3</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 3)}>Season 4</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 4)}>Season 5</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 5)}>Season 6</button>
+              <button className="visualization-btn" onClick={this.update.bind(this, 6)}>Season 7</button>
+            </div>
+          </div>
         </div>
+        <div id="visualization" ref="visualization"></div>
       </div>
     );
   }
 
 }
 
-export default Visualization;
+export default ForceLayout;

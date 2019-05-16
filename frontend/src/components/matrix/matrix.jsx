@@ -1,7 +1,5 @@
 import './matrix.css';
-
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 
 window.d3 = d3;
@@ -32,12 +30,12 @@ class Matrix extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchVisualizations().then((res) => {
+    this.props.fetchData().then((res) => {
 
       this.n = 40; //number of rows/columns for D3 Co-Occurence
 
       // pre-processing data
-      const datasets = res.visualizations.data;
+      const datasets = res.data.data;
       let allLinksSets = [];
       let allNodesSets = {};
       let allKeys = Object.keys(allNodesSets);
@@ -59,7 +57,7 @@ class Matrix extends React.Component {
 
       allNodesSets = Object.values(allNodesSets);
 
-      this.margin = { top: 80, right: 0, bottom: 10, left: 80 };
+      this.margin = { top: 60, right: 0, bottom: 10, left: 60 };
 
       const receivedNodes = allNodesSets;
       const receivedlinks = allLinksSets;
@@ -104,8 +102,8 @@ class Matrix extends React.Component {
       });
 
       // D3 Co-Occurence
-      this.width = 720;
-      this.height = 720;
+      this.width = 600;
+      this.height = 600;
 
       window.x = this.x = d3.scaleBand().rangeRound([0, this.width]);
       window.y = this.y = d3.scaleLinear().domain([0, this.height]);
@@ -164,7 +162,7 @@ class Matrix extends React.Component {
       barChartNodes.push(this.nodes[idx]);
     });
     
-    this.barchartMargin = { top: 20, right: 60, bottom: 0, left: 60 };
+    this.barchartMargin = { top: 20, right: 20, bottom: 20, left: 60 };
     this.barchartWidth = 480 - this.barchartMargin.left - this.barchartMargin.right;
     this.barchartHeight = 460 - this.barchartMargin.top - this.barchartMargin.bottom;
 
@@ -436,13 +434,12 @@ class Matrix extends React.Component {
   render() {
     return (
       <div className="matrix-container">
-        <div className="matrix-header">
-          <h1>Co-occurrence Matrix using D3 V5</h1>
-          <div className="matrix-buttons-div">
-            <Link to='/'>Collapsible Force Layout Representation</Link>
-            <br />
-            <button className="matrix-btn" onClick={this.toggleByName}>By Name</button>
-            <button className="matrix-btn" onClick={this.toggleByFrequency}>By Frequency</button>
+        <div className="matrix-header-container">
+          <div className="matrix-header">
+              <div className="matrix-buttons-div">
+                <button className="matrix-btn" onClick={this.toggleByName}>By Name</button>
+                <button className="matrix-btn" onClick={this.toggleByFrequency}>By Frequency</button>
+              </div>
           </div>
         </div>
         <div className="matrix-barchart">

@@ -1,0 +1,65 @@
+.App-Content {
+  height: 100vh;
+  display: block;
+  width: fit-content;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  position: fixed;
+  background-color: white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  font-size: 14px;
+  color: gray;
+}
+
+.header div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: content-box;
+  height: 100%;
+  margin: 5px 10px;
+  box-sizing: border-box;
+}
+
+.header a {
+  display: flex;
+  align-items: center;
+  margin: 7px 20px;
+  font-size: 14px;
+}
+
+.header a:first-of-type {
+  margin-left: 0;
+}
+
+.header a:last-of-type {
+  margin-right: 20px;
+}
+
+.header span {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+@media all and (max-width: 800px) {
+  #my-links {
+    display: none;
+  }
+
+  .header div {
+    justify-content: space-between;
+    width: 100%;
+  }
+}

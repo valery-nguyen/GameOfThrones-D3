@@ -1,0 +1,98 @@
+.matrix-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.matrix-header-container {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  position: fixed;
+  top: 41px;
+  background-color: white;
+}
+
+.matrix-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  font-size: 14px;
+  color: gray;
+  padding: 0 10px;
+}
+
+.matrix-header h1 {
+  padding-left: 20px;
+  font-size: 13px;
+}
+
+.matrix-header button {
+  padding: 20px;
+  font-size: 13px;
+}
+
+.matrix-barchart {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: left;
+  padding: 15px;
+  margin-top: 83px;
+}
+
+#matrix {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.column text {
+  text-anchor: start;
+  font-size: 10px;
+}
+
+.row text {
+  text-anchor: end;
+  font-size: 10px;
+}
+
+text.active {
+  fill: red;
+}
+
+
+/* barchart css below */
+#barchart {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+#barchart svg {
+  margin: 0;
+}
+
+.barchart-background {
+  fill: white;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
