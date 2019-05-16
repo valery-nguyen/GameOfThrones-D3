@@ -7,7 +7,7 @@
 .header-container {
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   background-color: white;
   z-index: 1;
@@ -67,5 +67,12 @@
 
   .header a {
     margin: 7px 0px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .header a {
+    margin: 7px 0px;
+    font-size: 11px;
   }
 }

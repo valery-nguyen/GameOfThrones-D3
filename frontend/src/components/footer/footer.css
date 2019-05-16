@@ -1,15 +1,17 @@
 .footer-container {
   display: flex;
   justify-content: center;
-  box-sizing: border-box;
+  box-sizing: content-box;
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
 }
 
 .footer {
   background-color: white;
   border-top: 1px solid lightgray;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,5 +20,4 @@
   font-size: 14px;
   color: gray;
   padding: 0 10px;
-  z-index: 1;
 }
