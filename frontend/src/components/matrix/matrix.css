@@ -2,17 +2,23 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
+  background-image: url('/images/bg1.png');
+  background-repeat: no-repeat;
+  background-position: top left; 
+  background-size: cover;
+  overflow: hidden;
+  height: calc(100vh - 40px);
 }
 
 .matrix-header-container {
   display: flex;
   flex-direction: row;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  border-top: 1px solid whitesmoke;
+  border-bottom: 1px solid #323232;
   width: 100%;
   position: fixed;
   top: 40px;
-  background-color: white;
+  background-color: #323232;
   z-index: 1;
 }
 
@@ -22,18 +28,29 @@
   justify-content: space-between;
   height: 40px;
   font-size: 14px;
-  color: gray;
+  color: whitesmoke;
   padding: 0 10px;
 }
 
-.matrix-header h1 {
-  padding-left: 20px;
-  font-size: 13px;
+#matrix label {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  color: black;
+  padding: 15px 0;
 }
 
 .matrix-header button {
   margin: 0 20px;
+  padding: 12px 15px;
   font-size: 13px;
+  background-color: #323232;
+}
+
+.matrix-header button:hover {
+  background-color: #4c4f62;
+  border-radius: 2px;
+  transition: 0.5s;
+  height: 100%;
 }
 
 .matrix-barchart {
@@ -76,12 +93,19 @@ text.active {
   align-items: center;
 }
 
+#barchart label {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  color: black;
+  padding: 15px 0;
+}
+
 #barchart svg {
   margin: 0;
 }
 
 .barchart-background {
-  fill: white;
+  fill: whitesmoke;
 }
 
 text {
@@ -100,7 +124,7 @@ text {
 
 @media all and (max-width: 480px) {
   .matrix-header-container {
-    top: 37px;
+    top: 36px;
   }
 
   .matrix-header button {

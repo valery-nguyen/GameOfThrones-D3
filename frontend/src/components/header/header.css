@@ -1,7 +1,8 @@
 .App-Content {
   height: 100vh;
   display: block;
-  width: fit-content;
+  /* width: fit-content; */
+  height: 100%;
 }
 
 .header-container {
@@ -9,7 +10,7 @@
   justify-content: center;
   width: 100%;
   position: fixed;
-  background-color: white;
+  background-color: #323232;
   z-index: 1;
 }
 
@@ -20,7 +21,7 @@
   width: 100%;
   height: auto;
   font-size: 14px;
-  color: gray;
+  color: whitesmoke;
 }
 
 .header div {
@@ -36,9 +37,17 @@
 .header a {
   display: flex;
   align-items: center;
-  margin: 7px 20px;
+  margin: 7px 5px;
   font-size: 14px;
   text-align: center;
+  padding: 0 15px;
+}
+
+.header a:hover {
+  background-color: #4c4f62;
+  border-radius: 2px;
+  transition: 0.5s;
+  height: 100%;
 }
 
 .header a:first-of-type {

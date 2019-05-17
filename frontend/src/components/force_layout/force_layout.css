@@ -1,23 +1,28 @@
 .visualization-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 108px);
+  height: calc(100vh - 107px);
   width: 100vw;
   position: fixed;
   bottom: 40px;
   left: 0;
+  background-image: url('/images/bg1.png');
+  background-repeat: no-repeat;
+  background-position: top left; 
+  background-size: cover;
+  overflow: hidden;
 }
 
 .visualization-header-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  border-top: 1px solid whitesmoke;
+  border-bottom: 1px solid #323232;
   width: 100%;
   position: fixed;
-  top: 41px;
-  background-color: white;
+  top: 40px;
+  background-color: #323232;
   z-index: 1;
 }
 
@@ -27,7 +32,7 @@
   justify-content: center;
   height: auto;
   font-size: 14px;
-  color: gray;
+  color: whitesmoke;
   box-sizing: content-box;
 }
 
@@ -39,12 +44,21 @@
 }
 
 .visualization-header button {
-  margin: 5px 20px 5px 20px;
+  margin: 0px 5px 0px 5px;
   font-size: 13px;
+  padding: 5px 15px;
+}
+
+.visualization-header button:hover {
+  background-color: #4c4f62;
+  border-radius: 2px;
+  transition: 0.5s;
+  height: 100%;
 }
 
 #visualization {
   height: calc(100vh - 92px);
+  opacity: 1;
 }
 
 #visualization svg {
@@ -63,7 +77,7 @@ circle {
 
 line {
   fill: none;
-  stroke: #9ecae1;
+  stroke: grey;
   stroke-width: 1.5px;
 }
 .visualization-container text {
@@ -76,12 +90,17 @@ line {
 
 @media all and (max-width: 480px) {
   .visualization-header-container {
-    top: 37px;
+    top: 36px;
   }
   
   .visualization-header button {
     font-size: 10px;
-    margin: 2px 5px 2px 5px;
+    margin: 0px 0px 0px 0px;
+    padding: 2px 5px;
+  }
+
+  .visualization-container {
+    height: calc(100vh - 94px);
   }
 }
   

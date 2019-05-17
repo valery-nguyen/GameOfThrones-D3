@@ -102,8 +102,8 @@ class Matrix extends React.Component {
       });
 
       // D3 Co-Occurence
-      this.width = 600;
-      this.height = 600;
+      this.width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2;
+      this.height = this.width;
 
       window.x = this.x = d3.scaleBand().rangeRound([0, this.width]);
       window.y = this.y = d3.scaleLinear().domain([0, this.height]);
@@ -163,11 +163,10 @@ class Matrix extends React.Component {
     });
     
     this.barchartMargin = { top: 20, right: 20, bottom: 20, left: 60 };
-    this.barchartWidth = 480 - this.barchartMargin.left - this.barchartMargin.right;
-    this.barchartHeight = 460 - this.barchartMargin.top - this.barchartMargin.bottom;
-
+    this.barchartWidth = (this.width * 2 / 3) - this.barchartMargin.left - this.barchartMargin.right;
     this.barchartx = d3.scaleLinear().range([0, this.barchartWidth]);
-    this.barcharty = 20;
+    this.barcharty = (this.height * 2 / 3) / 18;
+    this.barchartHeight = (this.barcharty + (this.barcharty * 7 / 30)) * 18;
 
     this.barchartColor = d3.scaleOrdinal().range(["steelblue", "red"]);
 
@@ -192,7 +191,7 @@ class Matrix extends React.Component {
     this.barChartSvg.append("g")
       .attr("class", "y axis")
       .append("line")
-        .attr("y1", "100%");
+      .attr("y1", this.barchartHeight);
 
     const root = d3.hierarchy({ root: "root", children: barChartNodes });
     root.sum(d => d.size);

@@ -50,10 +50,10 @@ class ForceLayout extends React.Component {
 
       this.mainCharacters = ['ARYA', 'DAENERYS', 'SANSA', 'JON', 'CERSEI', 'TYRION', 'JAIME', 'SAM', 'THEON', 'NIGHT_KING'];
 
-      this.width = 1600;
-      this.height = 800;
+      this.width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      this.height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-      this.setNumber = 5; //0-6
+      this.setNumber = 0; //0-6
       this.nodes = this.state.nodes[this.setNumber];
       this.links = this.state.links[this.setNumber];
 
@@ -141,7 +141,7 @@ class ForceLayout extends React.Component {
   }
 
   color(d) {
-    return this.mainCharacters.includes(d.id) ? "#fd8d3c" : '#92979c';
+    return this.mainCharacters.includes(d.id) ? '#F5555E' : '#4c4f62';
   } 
 
   updateLinks() {
