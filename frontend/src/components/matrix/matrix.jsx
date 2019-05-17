@@ -102,7 +102,10 @@ class Matrix extends React.Component {
       });
 
       // D3 Co-Occurence
-      this.width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2;
+      const maxWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2;
+      const maxHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 270;
+      
+      this.width = Math.min(maxWidth, maxHeight);
       this.height = this.width;
 
       window.x = this.x = d3.scaleBand().rangeRound([0, this.width]);
