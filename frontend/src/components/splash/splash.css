@@ -1,5 +1,5 @@
 .splash {
-  background-image: url('/images/map.png');
+  background-image: url('/images/splash.jpg');
   background-repeat: no-repeat;
   background-position: top left; 
   background-size: cover;
@@ -10,27 +10,112 @@
 
 .welcome-message {
   position: absolute;
-  bottom: calc(50vh - 100px / 2);
-  left: calc(50vw - 400px / 2);
+  bottom: calc(50vh);
+  left: calc(50vw - 600px / 2);
   height: 100px;
-  width: 400px;
-  background-color: whitesmoke;
-  border: 2px solid #7d7d7d;
-  border-radius: 4px;
-  font-size: 24px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .welcome-message p {
   padding: 3px;
-  color: #585858;
+  color: #fff;
   word-wrap: break-word;
   text-align: center;
   font-family: 'Lora', serif;
+  font-size: 28px;
+  text-shadow: 2px 2px #323232;
+}
+
+.welcome-message h1 {
+  padding: 3px;
+  color: #fff;
+  word-wrap: break-word;
+  text-align: center;
+  font-family: 'Lora', serif;
+  font-size: 60px;
+  text-shadow: 3px 3px #323232;
+}
+
+.site-description {
+  position: absolute;
+  bottom: calc(50vh - 378px / 2);
+  left: calc(50vw - 600px / 2);
+  width: 600px;
+}
+
+.site-description p {
+  text-align: center;
+  word-wrap: break-word;
+  color: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.splash hr {
+  color: whitesmoke;
+  position: absolute;
+  bottom: calc(50vh - 155px / 2);
+  left: calc(50vw - 100px / 2);
+  width: 100px;
+}
+
+.site-description a {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.site-description button {
+  padding: 15px 25px;
+  font-size: 16px;
+  opacity: 0.7;
+  border: 1px solid #585858;
+  color: #fff;
+  background-color: #323232;
+  left: calc(50vw - 100px / 2);
+}
+
+.site-description button:hover {
+  background-color: #7d7d7d;
+  border-radius: 2px;
+  transition: 0.5s;
+  color: #fff;
+  opacity: 1;
+}
+
+@media all and (max-width: 800px) {
+  .welcome-message {
+    width: 400px;
+    left: calc(50vw - 400px / 2);
+    bottom: calc(50vh + 10px);
+  }
+
+  .welcome-message p {
+    font-size: 24px;
+  }
+
+  .welcome-message h1 {
+    font-size: 40px;
+  }
+
+  .site-description {
+    left: calc(50vw - 400px / 2);
+    bottom: calc(50vh - 364px / 2);
+    width: 400px;
+  }
+
+  .splash hr {
+    bottom: calc(50vh - 98px / 2);
+    width: 100px;
+  }
+
+  .site-description p {
+    font-size: 14px;
+  }
 }
 
 @media all and (max-width: 480px) {

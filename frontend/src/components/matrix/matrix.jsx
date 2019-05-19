@@ -185,7 +185,7 @@ class Matrix extends React.Component {
     this.barcharty = (this.height * 2 / 3) / 18;
     this.barchartHeight = (this.barcharty + (this.barcharty * 7 / 30)) * 18;
 
-    this.barchartColor = d3.scaleOrdinal().range(["steelblue", "red"]);
+    this.barchartColor = d3.scaleOrdinal().range(["#ba3333", "#ba3333"]);
 
     this.partition = d3.partition();
 
@@ -301,7 +301,7 @@ class Matrix extends React.Component {
       .attr("class", "background")
       .attr("width", this.width)
       .attr("height", this.height)
-      .style("fill", 'whitesmoke');
+      .style("fill", '#f2fdff');
 
     this.row = this.svgContainer.selectAll(".row")
       .data(this.matrix)
