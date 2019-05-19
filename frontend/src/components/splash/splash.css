@@ -1,0 +1,42 @@
+.splash {
+  background-image: url('/images/map.png');
+  background-repeat: no-repeat;
+  background-position: top left; 
+  background-size: cover;
+  overflow: hidden;
+  height: calc(100vh - 40px);
+  width: 100vw;
+}
+
+.welcome-message {
+  position: absolute;
+  bottom: calc(50vh - 100px / 2);
+  left: calc(50vw - 400px / 2);
+  height: 100px;
+  width: 400px;
+  background-color: whitesmoke;
+  border: 2px solid #7d7d7d;
+  border-radius: 4px;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.welcome-message p {
+  padding: 3px;
+  color: #585858;
+  word-wrap: break-word;
+  text-align: center;
+  font-family: 'Lora', serif;
+}
+
+@media all and (max-width: 480px) {
+  .welcome-message {
+    left: 0;
+    left: calc(50vw - 80vw / 2);
+    width: 80vw;
+  }
+}

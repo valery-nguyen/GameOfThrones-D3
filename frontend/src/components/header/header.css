@@ -1,3 +1,11 @@
+.selected {
+  background-color: #4c4f62;
+  border-radius: 2px;
+  transition: 0.5s;
+  height: 100%;
+  color: #fff;
+}
+
 .App-Content {
   height: 100vh;
   display: block;
@@ -12,6 +20,7 @@
   position: fixed;
   background-color: #323232;
   z-index: 1;
+  height: 41px;
 }
 
 .header {
@@ -21,7 +30,12 @@
   width: 100%;
   height: auto;
   font-size: 14px;
-  color: whitesmoke;
+  color: #7d7d7d;
+}
+
+.header img {
+  height: 24px;
+  width: 184px;
 }
 
 .header div {
@@ -34,10 +48,20 @@
   box-sizing: border-box;
 }
 
+.header a:first-of-type {
+  display: flex;
+  align-items: center;
+  margin: 0 0;
+  font-size: 14px;
+  text-align: center;
+  padding: 0 15px;
+  margin-left: 0;
+}
+
 .header a {
   display: flex;
   align-items: center;
-  margin: 7px 5px;
+  margin: 7px 0;
   font-size: 14px;
   text-align: center;
   padding: 0 15px;
@@ -48,14 +72,9 @@
   border-radius: 2px;
   transition: 0.5s;
   height: 100%;
-}
-
-.header a:first-of-type {
-  margin-left: 0;
-}
-
-.header a:last-of-type {
-  margin-right: 20px;
+  color: #fff;
+  border-left: 1px solid #323232;
+  border-right: 1px solid #323232;
 }
 
 .header span {
@@ -74,14 +93,37 @@
     width: 100%;
   }
 
+  .header a:first-of-type {
+    margin: 7px 0px;
+    padding: 0 10px;
+  }
+
   .header a {
     margin: 7px 0px;
+    padding: 0 10px;
+  }
+
+  .header img {
+    height: 17px;
+    width: 130px;
   }
 }
 
 @media all and (max-width: 480px) {
-  .header a {
-    margin: 7px 0px;
+  .header a:first-of-type {
     font-size: 11px;
+  }
+
+  .header a {
+    font-size: 11px;
+  }
+
+  .header img {
+    height: 12px;
+    width: 92px;
+  }
+
+  .header-container {
+    height: 36px;
   }
 }

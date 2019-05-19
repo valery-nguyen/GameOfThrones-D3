@@ -30,6 +30,13 @@ class ForceLayout extends React.Component {
   }
 
   componentDidMount() {
+    const matrixPage = document.getElementById("matrix-page");
+    const forcePage = document.getElementById("force-page");
+    forcePage.classList.add("selected");
+    if (matrixPage.className.includes("selected")) {
+      matrixPage.classList.remove("selected");
+    }
+
     this.props.fetchData().then((res) => {
       const datasets = res.data.data;
       let allLinksSets = [];
@@ -77,10 +84,21 @@ class ForceLayout extends React.Component {
           .distance( () => 20 ))
         .force('collision', d3.forceCollide( () => 4 ))
         .on('tick', this.ticked);
+
+      document.getElementById(`btn-0`).classList.add("selected");
     });
   }
 
   update(setNumber, e) {
+    [0,1,2,3,4,5,6].forEach(n => {
+      let button = document.getElementById(`btn-${n}`);
+      if (n === setNumber && !button.className.includes("selected")) {
+        button.classList.add("selected");
+      } else if (n !== setNumber && button.className.includes("selected") && setNumber >= 0) {
+        button.classList.remove("selected");
+      }
+    });
+
     e.preventDefault();
     if(setNumber !== -1) this.setNumber = setNumber;
     this.nodes = this.state.nodes[this.setNumber];
@@ -222,13 +240,13 @@ class ForceLayout extends React.Component {
             <div className="visualization-buttons-div">
               <button className="visualization-btn" onClick={this.nodesToggleHandle}>Mode Switch</button>
               <button className="visualization-btn" onClick={this.recenter}>Re-center</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 1)}>Season 2</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 2)}>Season 3</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 3)}>Season 4</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 4)}>Season 5</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 5)}>Season 6</button>
-              <button className="visualization-btn" onClick={this.update.bind(this, 6)}>Season 7</button>
+              <button id="btn-0" className="visualization-btn" onClick={this.update.bind(this, 0)}>Season 1</button>
+              <button id="btn-1"className="visualization-btn" onClick={this.update.bind(this, 1)}>Season 2</button>
+              <button id="btn-2"className="visualization-btn" onClick={this.update.bind(this, 2)}>Season 3</button>
+              <button id="btn-3"className="visualization-btn" onClick={this.update.bind(this, 3)}>Season 4</button>
+              <button id="btn-4"className="visualization-btn" onClick={this.update.bind(this, 4)}>Season 5</button>
+              <button id="btn-5"className="visualization-btn" onClick={this.update.bind(this, 5)}>Season 6</button>
+              <button id="btn-6"className="visualization-btn" onClick={this.update.bind(this, 6)}>Season 7</button>
             </div>
           </div>
         </div>

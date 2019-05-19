@@ -30,6 +30,13 @@ class Matrix extends React.Component {
   }
 
   componentDidMount() {
+    const matrixPage = document.getElementById("matrix-page");
+    const forcePage = document.getElementById("force-page");
+    matrixPage.classList.add("selected");
+    if (forcePage.className.includes("selected")) {
+      forcePage.classList.remove("selected");
+    }
+
     this.props.fetchData().then((res) => {
 
       this.n = 40; //number of rows/columns for D3 Co-Occurence
@@ -150,6 +157,13 @@ class Matrix extends React.Component {
       };
 
       // initial display for D3 Co-Occurence
+      const byNameButton = document.getElementById("by-name");
+      const byFrequencyButton = document.getElementById("by-frequency");
+      byNameButton.classList.add("selected");
+      if (byFrequencyButton.className.includes("selected")) {
+        byFrequencyButton.classList.remove("selected");
+      }
+      
       this.x.domain(this.orders.label);
       window.displayBy = 'label';
 
@@ -409,11 +423,25 @@ class Matrix extends React.Component {
   toggleByName(e) {
     e.preventDefault();
     this.order('label');
+
+    const byNameButton = document.getElementById("by-name");
+    const byFrequencyButton = document.getElementById("by-frequency");
+    byNameButton.classList.add("selected");
+    if (byFrequencyButton.className.includes("selected")) {
+      byFrequencyButton.classList.remove("selected");
+    }
   }
 
   toggleByFrequency(e) {
     e.preventDefault();
     this.order('count');
+
+    const byNameButton = document.getElementById("by-name");
+    const byFrequencyButton = document.getElementById("by-frequency");
+    byFrequencyButton.classList.add("selected");
+    if (byNameButton.className.includes("selected")) {
+      byNameButton.classList.remove("selected");
+    }
   }
 
   order(value) {
@@ -439,8 +467,8 @@ class Matrix extends React.Component {
         <div className="matrix-header-container">
           <div className="matrix-header">
               <div className="matrix-buttons-div">
-                <button className="matrix-btn" onClick={this.toggleByName}>By Name</button>
-                <button className="matrix-btn" onClick={this.toggleByFrequency}>By Frequency</button>
+                <button id="by-name" className="matrix-btn" onClick={this.toggleByName}>By Name</button>
+                <button id="by-frequency" className="matrix-btn" onClick={this.toggleByFrequency}>By Frequency</button>
               </div>
           </div>
         </div>

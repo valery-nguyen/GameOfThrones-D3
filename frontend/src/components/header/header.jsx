@@ -8,9 +8,9 @@ class Header extends React.Component {
       <div className="header-container">
         <div className="header">
           <div>
-            <Link to='/'>GAME OF THRONES | D3</Link>
-            <Link to='/matrix'>Matrix &amp; Bar Chart</Link>
-            <Link to='/'>Force Layout</Link>
+            <Link to='/'><img src="/images/logo.png" alt="logo" /> | D3</Link>
+            <Link to='/matrix' id="matrix-page">Matrix &amp; Bar Chart</Link>
+            <Link to='/forcelayout' id="force-page" >Force Layout</Link>
           </div>
           
 

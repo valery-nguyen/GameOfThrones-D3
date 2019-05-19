@@ -13,7 +13,7 @@
 .matrix-header-container {
   display: flex;
   flex-direction: row;
-  border-top: 1px solid whitesmoke;
+  border-top: 1px solid #7d7d7d;
   border-bottom: 1px solid #323232;
   width: 100%;
   position: fixed;
@@ -28,7 +28,7 @@
   justify-content: space-between;
   height: 40px;
   font-size: 14px;
-  color: whitesmoke;
+  color: #7d7d7d;
   padding: 0 10px;
 }
 
@@ -39,11 +39,15 @@
   padding: 15px 0;
 }
 
-.matrix-header button {
-  margin: 0 20px;
+.matrix-header button:first-of-type {
+  margin-left: 1px;
   padding: 12px 15px;
   font-size: 13px;
-  background-color: #323232;
+}
+
+.matrix-header button {
+  padding: 12px 15px;
+  font-size: 13px;
 }
 
 .matrix-header button:hover {
@@ -51,6 +55,9 @@
   border-radius: 2px;
   transition: 0.5s;
   height: 100%;
+  color: #fff;
+  border-left: 1px solid #323232;
+  border-right: 1px solid #323232;
 }
 
 .matrix-barchart {
@@ -128,6 +135,10 @@ text {
   }
 
   .matrix-header button {
+    font-size: 10px;
+  }
+
+  .matrix-header button:first-of-type {
     font-size: 10px;
   }
 }

@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-top: 1px solid whitesmoke;
+  border-top: 1px solid #7d7d7d;
   border-bottom: 1px solid #323232;
   width: 100%;
   position: fixed;
@@ -32,7 +32,7 @@
   justify-content: center;
   height: auto;
   font-size: 14px;
-  color: whitesmoke;
+  color: #7d7d7d;
   box-sizing: content-box;
 }
 
@@ -54,6 +54,9 @@
   border-radius: 2px;
   transition: 0.5s;
   height: 100%;
+  color: #fff;
+  border-left: 1px solid #323232;
+  border-right: 1px solid #323232;
 }
 
 #visualization {
