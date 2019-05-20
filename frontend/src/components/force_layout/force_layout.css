@@ -36,6 +36,18 @@
   box-sizing: content-box;
 }
 
+.visualization-title h1 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  font-size: 30px;
+  color: #323232;
+  text-shadow: 0 2px 5px #fff;
+  background-color: transparent;
+  word-wrap: break-word;
+  text-align: center;
+}
+
 .visualization-buttons-div {
   display: flex;
   flex-wrap: wrap;
@@ -90,14 +102,15 @@ line {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px;
   border: 1px solid #3182bd;
+  text-shadow: 1px 1px white;
 }
 
 .navigation-tips {
   margin: 10px 10px;
   position: absolute;
   bottom: 0px;
-  padding: 5px;
-  width: 150px;
+  padding: 10px;
+  width: 140px;
   font-size: 12px;
   font-family: 'Lora', serif;
   background-color: whitesmoke;
@@ -106,8 +119,20 @@ line {
   border-radius: 2px;
 }
 
+.navigation-tips h1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.navigation-tips label {
+  margin: 15px 0;
+}
+
 .navigation-tips p {
-  padding: 5px 0;
+  padding: 5px 0 5px 5px;
 }
 
 @media all and (max-width: 480px) {

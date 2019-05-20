@@ -24,6 +24,7 @@ class Matrix extends React.Component {
     this.updateNodes = this.updateNodes.bind(this);
     this.toggleByName = this.toggleByName.bind(this);
     this.toggleByFrequency = this.toggleByFrequency.bind(this);
+    this.toggleBarChart = this.toggleBarChart.bind(this);
     this.order = this.order.bind(this);
     window.mouseout = this.mouseout = this.mouseout.bind(this);
     window.mouseover = this.mouseover = this.mouseover.bind(this);
@@ -64,7 +65,7 @@ class Matrix extends React.Component {
 
       allNodesSets = Object.values(allNodesSets);
 
-      this.margin = { top: 60, right: 0, bottom: 10, left: 60 };
+      this.margin = { top: 72, right: 0, bottom: 10, left: 72 };
 
       const receivedNodes = allNodesSets;
       const receivedlinks = allLinksSets;
@@ -110,7 +111,7 @@ class Matrix extends React.Component {
 
       // D3 Co-Occurence
       const maxWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2;
-      const maxHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 270;
+      const maxHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 300;
       
       this.width = Math.min(maxWidth, maxHeight);
       this.height = this.width;
@@ -444,6 +445,28 @@ class Matrix extends React.Component {
     }
   }
 
+  toggleBarChart(e) {
+    e.preventDefault();
+    const barChart = document.getElementById("barchart-container");
+    const barChartButton = document.getElementById("toggle-barchart");
+    const matrixExplanation = document.getElementById("matrix-explanation");
+    const matrixContainer = document.getElementById("matrix-container");
+
+    if (barChart.className.includes("hidden")) {
+      barChart.classList.remove("hidden");
+      matrixExplanation.classList.add("hidden");
+      barChartButton.innerText = "Hide Bar Chart";
+      matrixContainer.classList.remove("bg1");
+      matrixContainer.classList.add("bg3");
+    } else {
+      barChart.classList.add("hidden");
+      matrixExplanation.classList.remove("hidden");
+      barChartButton.innerText = "Show Bar Chart";
+      matrixContainer.classList.remove("bg3");
+      matrixContainer.classList.add("bg1");
+    }
+  }
+
   order(value) {
     window.x.domain(window.orders[value]);
 
@@ -463,21 +486,42 @@ class Matrix extends React.Component {
 
   render() {
     return (
-      <div className="matrix-container">
+      <div id="matrix-container" className="matrix-container bg1">
         <div className="matrix-header-container">
           <div className="matrix-header">
               <div className="matrix-buttons-div">
                 <button id="by-name" className="matrix-btn" onClick={this.toggleByName}>By Name</button>
                 <button id="by-frequency" className="matrix-btn" onClick={this.toggleByFrequency}>By Frequency</button>
+              <button id="toggle-barchart" className="matrix-btn" onClick={this.toggleBarChart}>Show Bar Chart</button>
               </div>
           </div>
         </div>
-        <div className="matrix-barchart">
-          <div id="matrix" ref="matrix">
-            <label>Interactions between characters:</label>
-          </div>
-          <div id="barchart" ref="barchart">
-            <label>Number of people killed:</label>
+        <div className="matrix-barchart-container">
+          <h1>INTERACTIONS BETWEEN CHARACTERS</h1>
+          <div className="matrix-barchart">
+            <div id="matrix-container">
+              <div id="matrix" ref="matrix"></div>
+            </div>
+            <div id="barchart-container" className="hidden">
+              <div id="barchart" ref="barchart">
+                <label>Kill Count Per Character</label>
+              </div>
+            </div>
+            <div id="matrix-explanation" className="">
+              <div>
+                <h2>Story</h2>
+                <div className="matrix-explanation-body-container">
+                  <div className="matrix-explanation-body">
+                    <p><img src="" alt="" /><span>Tyrion</span></p>
+                    <p><img src="" alt="" /><span>Cersei</span></p>
+                    <p><img src="" alt="" /><span>Sansa</span></p>
+                    <p><img src="" alt="" /><span>Jon</span></p>
+                    <p><img src="" alt="" /><span>Jaime</span></p>
+                    <p><img src="" alt="" /><span>Daenerys</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

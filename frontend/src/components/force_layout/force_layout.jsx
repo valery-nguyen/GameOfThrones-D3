@@ -251,10 +251,16 @@ class ForceLayout extends React.Component {
           </div>
         </div>
         <div className="navigation-tips">
-          <p>Navigation Tips</p>
-          <p>Click &amp; Drag: click and drag a node to see all nodes it has connected with during the season.</p>
-          <p>Pan: left-clic anywhere outside of the force layout and drag</p>
-          <p>Zoom: use the mouse wheel to zoom-in and zoom-out</p>
+          <h1>Navigation Tips</h1>
+          <label>Click &amp; Drag a node :</label>
+          <p>Select a node to see all connected nodes</p>
+          <label>Pan :</label>
+          <p>Select and drag anywhere outside of the force layout</p>
+          <label>Zoom :</label>
+          <p>Use the mouse wheel to zoom in and out</p>
+        </div>
+        <div className="visualization-title">
+          <h1>INTERACTIONS BETWEEN CHARACTERS</h1>
         </div>
         <div id="visualization" ref="visualization"></div>
       </div>
