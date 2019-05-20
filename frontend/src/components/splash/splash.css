@@ -67,6 +67,9 @@
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
 .site-description button {
@@ -120,6 +123,12 @@
 
 @media all and (max-width: 480px) {
   .welcome-message {
+    left: 0;
+    left: calc(50vw - 80vw / 2);
+    width: 80vw;
+  }
+
+  .site-description {
     left: 0;
     left: calc(50vw - 80vw / 2);
     width: 80vw;
