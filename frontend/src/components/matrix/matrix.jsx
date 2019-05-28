@@ -541,7 +541,7 @@ class Matrix extends React.Component {
                     <h2>Matrix Legend</h2>
                     <div className="matrix-explanation-body-container">
                       <div className="matrix-explanation-legend-body">
-                        <img src="/images/colorscale.png" alt="" />
+                        <img src="/images/colorscale.png" alt="background" />
                         <p><span>least interactions</span><span>most interactions</span></p>
                       </div>
                     </div>
@@ -561,7 +561,7 @@ class Matrix extends React.Component {
                           <li><button onClick={this.handleClick}>Jaime Lannister</button></li>
                           <li><button onClick={this.handleClick}>Daenerys Targaryen</button></li>
                         </ul>
-                          <img id="char-img" src="/images/tyrion.jpg"/>
+                          <img id="char-img" src="/images/tyrion.jpg" alt="character"/>
                       </div>
                     </div>
                   </div>
@@ -569,7 +569,7 @@ class Matrix extends React.Component {
                     <h2>Associated House</h2>
                     <div className="matrix-explanation-body-2">
                       <p>House Emblem</p>
-                      <img id="emblem-img" src="/images/lannister.jpg" />
+                      <img id="emblem-img" src="/images/lannister.jpg" alt="emblem"/>
                     </div>
                   </div>
                 </div>

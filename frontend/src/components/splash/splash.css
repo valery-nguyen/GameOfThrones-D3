@@ -50,9 +50,10 @@
 .site-description p {
   text-align: center;
   word-wrap: break-word;
+  font-family: 'Lora', serif;
   color: #fff;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .splash hr {
@@ -74,6 +75,7 @@
 
 .site-description button {
   padding: 15px 25px;
+  font-family: 'Lora', serif;
   font-size: 16px;
   opacity: 0.7;
   border: 1px solid #585858;

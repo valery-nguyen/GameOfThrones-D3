@@ -20,6 +20,7 @@
   font-size: 14px;
   color: #7d7d7d;
   padding: 0 10px;
+  cursor: default;
 }
 
 @media all and (max-width: 480px) {
