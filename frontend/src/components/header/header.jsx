@@ -16,7 +16,7 @@ class Header extends React.Component {
 
           <div id="my-links">
             <a href="https://www.linkedin.com/in/valeryn/" target="_blank" rel="noopener noreferrer">LinkedIn</a><span>|</span>
-            <a href="https://github.com/valery-nguyen" target="_blank" rel="noopener noreferrer">GitHub</a><span>|</span>
+            <a href="https://github.com/valery-nguyen/GameOfThrones-D3" target="_blank" rel="noopener noreferrer">GitHub</a><span>|</span>
             <a href="https://angel.co/valeryn" target="_blank" rel="noopener noreferrer">AngelList</a>
           </div>
         </div>
