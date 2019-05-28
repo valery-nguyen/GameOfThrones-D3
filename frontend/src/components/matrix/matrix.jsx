@@ -28,6 +28,8 @@ class Matrix extends React.Component {
     this.order = this.order.bind(this);
     window.mouseout = this.mouseout = this.mouseout.bind(this);
     window.mouseover = this.mouseover = this.mouseover.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -228,10 +230,11 @@ class Matrix extends React.Component {
 
     let enter = this.bar(d)
       .attr("transform", this.stack(i))
-      .style("opacity", 1);
+      .style("opacity", 1)
+      .attr("class", "barchart-bar-container");
 
-    enter.select("text").style("fill-opacity", 1e-6);
-    enter.select("rect").style("fill", this.barchartColor(true));
+    enter.select("text").style("fill-opacity", 1e-6).attr("class", "barchart-label");
+    enter.select("rect").attr("class", "barchart-bar");
 
     this.barchartx.domain([0, d3.max(d.children, d => d.data.deathCount)]).nice();
     this.barChartSvg.selectAll(".x.axis").transition()
@@ -248,7 +251,6 @@ class Matrix extends React.Component {
 
     enterTransition.select("rect")
       .attr("width", d => this.barchartx(d.data.deathCount))
-      .style("fill", d => this.barchartColor(!!d.children));
 
     this.barChartSvg.select(".barchart-background")
       .datum(d)
@@ -484,6 +486,27 @@ class Matrix extends React.Component {
       .attr("transform", (d, i) => "translate(" + window.x(i) + ")rotate(-90)");
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    const fullName = e.target.innerText.split(' ');
+    const char = fullName[0].toLowerCase();
+    const house = fullName[1].toLowerCase();
+    const charImg = document.getElementById("char-img");
+    const houseImg = document.getElementById("emblem-img");
+    const ulEl = document.getElementById("matrix-explanation-body-names");
+
+    charImg.src = `/images/${char}.jpg`;
+    houseImg.src = `/images/${house}.jpg`;
+
+    Array.from(ulEl.children).forEach(li => {
+      if (li.innerText === e.target.innerText) {
+        li.className = "selected-char";
+      } else {
+        li.className = "";
+      }
+    });
+  }
+
   render() {
     return (
       <div id="matrix-container" className="matrix-container bg1">
@@ -503,21 +526,51 @@ class Matrix extends React.Component {
               <div id="matrix" ref="matrix"></div>
             </div>
             <div id="barchart-container" className="hidden">
-              <div id="barchart" ref="barchart">
-                <label>Kill Count Per Character</label>
+              <div id="barchart-container-between">
+                <div id="barchart" ref="barchart">
+                  <label>Characters Responsible for the Most Deaths</label>
+                </div>
               </div>
             </div>
             <div id="matrix-explanation" className="">
-              <div>
-                <h2>Story</h2>
-                <div className="matrix-explanation-body-container">
-                  <div className="matrix-explanation-body">
-                    <p><img src="" alt="" /><span>Tyrion</span></p>
-                    <p><img src="" alt="" /><span>Cersei</span></p>
-                    <p><img src="" alt="" /><span>Sansa</span></p>
-                    <p><img src="" alt="" /><span>Jon</span></p>
-                    <p><img src="" alt="" /><span>Jaime</span></p>
-                    <p><img src="" alt="" /><span>Daenerys</span></p>
+              <div id="matrix-explanation-between">
+
+
+                <div id="matrix-explanation-inner-top">
+                  <div id="matrix-explanation-legend">
+                    <h2>Matrix Legend</h2>
+                    <div className="matrix-explanation-body-container">
+                      <div className="matrix-explanation-legend-body">
+                        <img src="/images/colorscale.png" alt="" />
+                        <p><span>least interactions</span><span>most interactions</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="matrix-explanation-inner">
+                  <div id="matrix-explanation-story">
+                    <h2>Top 6 Characters with the Most Interactions</h2>
+                    <div className="matrix-explanation-body-container">
+                      <div className="matrix-explanation-body">
+                        <ul id="matrix-explanation-body-names" className="matrix-explanation-body-names">
+                          <li className="selected-char"><button onClick={this.handleClick}>Tyrion Lannister</button></li>
+                          <li><button onClick={this.handleClick}>Cersei Lannister</button></li>
+                          <li><button onClick={this.handleClick}>Sansa Stark</button></li>
+                          <li><button onClick={this.handleClick}>Jon Snow</button></li>
+                          <li><button onClick={this.handleClick}>Jaime Lannister</button></li>
+                          <li><button onClick={this.handleClick}>Daenerys Targaryen</button></li>
+                        </ul>
+                          <img id="char-img" src="/images/tyrion.jpg"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="matrix-explanation-story">
+                    <h2>Associated House</h2>
+                    <div className="matrix-explanation-body-2">
+                      <p>House Emblem</p>
+                      <img id="emblem-img" src="/images/lannister.jpg" />
+                    </div>
                   </div>
                 </div>
               </div>

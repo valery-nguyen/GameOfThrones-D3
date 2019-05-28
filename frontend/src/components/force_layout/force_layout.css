@@ -37,6 +37,7 @@
 }
 
 .visualization-title h1 {
+  cursor: default;
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
@@ -125,14 +126,17 @@ line {
   margin-bottom: 10px;
   font-size: 13px;
   text-decoration: underline;
+  cursor: default;
 }
 
 .navigation-tips label {
   margin: 15px 0;
+  cursor: default;
 }
 
 .navigation-tips p {
   padding: 5px 0 5px 5px;
+  cursor: default;
 }
 
 @media all and (max-width: 480px) {
