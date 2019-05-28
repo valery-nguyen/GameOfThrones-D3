@@ -28,7 +28,7 @@ with GameOfThrones-D3, users will be able to:
 based on cumulative data from seasons 1 through 7
 * - [x] Select whether to reorganize the characters by name or by frequency of interactions
 
-- [x] View the number of kills associated to main characters through a Bar Chart representation
+- [x] View the number of deaths associated to main characters through a Bar Chart representation
 * - [x] Show or hide the Bar Chart
 
 ## Architecture and Technologies
@@ -45,14 +45,8 @@ This project will be implemented with the following technologies:
 * [Redux](https://redux.js.org)
 * [Node](https://nodejs.org/)
 
-## Implementation Timeline
-TBD
-
 ## Authors
 * **Valery Nguyen**
-
-## Acknowledgments
-* Credits to App Academy for the giving me the technical knowledge to put together this app.
 
 [//]: # (reference links are listed below)
 [GameOfThrones-D3 is LIVE!]: <https://gameofthrones-d3.herokuapp.com/>
