@@ -1,8 +1,9 @@
 # [GameOfThrones-D3]
 
-GameOfThrones-D3 explores the interactions between the various characters of HBO series **Game of Thrones**.
+GameOfThrones-D3 explores the interactions between the various characters of HBO series **Game of Thrones** through several D3.js visualization techniques.
 
-![screenshot](https://user-images.githubusercontent.com/13773733/58668625-75732180-8307-11e9-8588-73e160b4e9b4.jpg)
+![screenshot](https://user-images.githubusercontent.com/13773733/58668814-21b50800-8308-11e9-95a4-f910b607996f.png)
+![screenshot2](https://user-images.githubusercontent.com/13773733/58668625-75732180-8307-11e9-8588-73e160b4e9b4.jpg)
 
 ## Background
 
