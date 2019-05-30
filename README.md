@@ -51,7 +51,7 @@ npm run dev
 * Hosted on [Heroku](https://www.heroku.com/)
 
 ### Built With
-* [D3.js V5](https://d3js.org/)
+* [D3.js v5](https://d3js.org/)
 * [React.js](https://reactjs.org)
 * [Redux.js](https://redux.js.org)
 * [Express.js](https://expressjs.com/)
