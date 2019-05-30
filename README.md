@@ -2,6 +2,8 @@
 
 GameOfThrones-D3 explores the interactions between the various characters of HBO series **Game of Thrones**.
 
+![screenshot](https://user-images.githubusercontent.com/13773733/58668625-75732180-8307-11e9-8588-73e160b4e9b4.jpg)
+
 ## Background
 
 This application uses data solely based on the HBO series, fan-based datasets which can be found here: 
