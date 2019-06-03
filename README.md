@@ -5,6 +5,18 @@ GameOfThrones-D3 explores the interactions between the various characters of HBO
 ![screenshot](https://user-images.githubusercontent.com/13773733/58668814-21b50800-8308-11e9-95a4-f910b607996f.png)
 ![screenshot2](https://user-images.githubusercontent.com/13773733/58668625-75732180-8307-11e9-8588-73e160b4e9b4.jpg)
 
+### Built With
+
+* [D3.js v5](https://d3js.org/)
+* [React.js](https://reactjs.org)
+* [Redux.js](https://redux.js.org)
+* [Express.js](https://expressjs.com/)
+* [Node.js](https://nodejs.org/)
+
+### Deployment
+
+* Hosted on [Heroku](https://www.heroku.com/)
+
 ## Background
 
 This application uses data solely based on the HBO series, fan-based datasets which can be found here: 
@@ -49,16 +61,6 @@ npm install
 ```
 npm run dev
 ```
-
-### Deployment
-* Hosted on [Heroku](https://www.heroku.com/)
-
-### Built With
-* [D3.js v5](https://d3js.org/)
-* [React.js](https://reactjs.org)
-* [Redux.js](https://redux.js.org)
-* [Express.js](https://expressjs.com/)
-* [Node.js](https://nodejs.org/)
 
 ## Authors
 * **Valery Nguyen**
