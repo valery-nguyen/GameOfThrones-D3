@@ -26,7 +26,7 @@ This application uses data solely based on the HBO series, fan-based datasets wh
 
 Characters informations are based on HBO's series [viewers guide](http://viewers-guide.hbo.com/game-of-thrones/).
 
-This application incorporates several of representation of those data, outlined below in the **Functionality & MVP** section.
+This application incorporates several representations of those data, as seen above.
 
 ## Installation
 
